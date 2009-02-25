@@ -1,0 +1,28 @@
+Prerequisites:
+
+    $ port install boost
+    $ port install gettext
+    $ port install rlog
+    $ port install openssl # not needed?
+
+Rebuild autoconf setup from bare:
+
+    $ autoreconf -if  # as per: https://bugs.launchpad.net/encfs/+bug/237321
+
+Run configure:
+
+    $ LDFLAGS=-L/opt/local/lib CPPFLAGS=-D__FreeBSD__=10 ./configure --with-boost-serialization=boost_serialization-mt --with-boost-system=boost_system-mt --with-boost-filesystem=boost_filesystem-mt 
+
+
+
+# Other Notes #
+
+http://code.google.com/p/encfs/issues/detail?id=26
+# Fixed by -D__FreeBSD__, could also be fixed by ::fdatasync --> ::fsync
+
+http://trac.macports.org/ticket/16204
+
+LIBS=-lboost_serialization-mt-s -lboost_system-mt-s # want -mt (not -mt-s) versions to avoid dynamic linking problem at runtime
+RLOG_LIBS=-L/path/to/rlog -lrlog # recently fixed in svn trunk
+LDFLAGS=-L/path/to/rlog
+CPPFLAGS=-D__FreeBSD__=10
