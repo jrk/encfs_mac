@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#autoreconf -if
+autoreconf -if
 
 _BOOST_SERIALIZATION_LIB=boost_serialization-mt
 _BOOST_SYSTEM_LIB=boost_system-mt
